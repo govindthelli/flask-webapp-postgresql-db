@@ -31,15 +31,20 @@ app.config['SECRET_KEY'] = os.urandom(32)
 moment = Moment(app)
 
 if os.environ.get('DEPLOYMENT_LOCATION') == 'gcp':
-    print("Loading environment.gcp_production.")
     app.config.from_object('environment.gcp_production')
     setup_db(app)
+
 elif os.environ.get('DEPLOYMENT_LOCATION') == 'azure':
-    print("Loading environment.azure_production.")
     app.config.from_object('environment.azure_production')
     setup_db(app)
+
+elif os.environ.get('DEPLOYMENT_LOCATION') == 'aws':
+    app.config.from_object('environment.aws_production')
+    setup_db(app)
+
 else:
-    print("No environment detected.")
+    raise Exception("DEPLOYMENT_LOCATION not set or invalid")
+
 
 #----------------------------------------------------------------------------#
 # Filters.
