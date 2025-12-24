@@ -24,8 +24,6 @@ services:
       - media:/app/media
     networks:
       - app-network
-    expose:
-      - "8000"
     depends_on:
       db:
         condition: service_healthy
