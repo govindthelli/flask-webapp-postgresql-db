@@ -22,6 +22,7 @@ services:
       - .env
     volumes:
       - media:/app/media
+      - static:/app/static
     networks:
       - app-network
     depends_on:
@@ -41,5 +42,6 @@ services:
 volumes:
   postgres_data:
   media:
+  static:
 networks:
   app-network:
